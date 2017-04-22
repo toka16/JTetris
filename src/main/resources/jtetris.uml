@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.coolcompany.jtetris</OriginalElement>
+  <nodes>
+    <node x="787.0677521008404" y="1756.0">com.coolcompany.jtetris.JBrainTetris</node>
+    <node x="1105.7076330532213" y="1816.5">com.coolcompany.jtetris.BadBrain</node>
+    <node x="910.7284663865546" y="395.0">com.coolcompany.jtetris.Brain</node>
+    <node x="167.62324929971987" y="0.0">com.coolcompany.jtetris.TPoint</node>
+    <node x="333.50000000000006" y="727.0">com.coolcompany.jtetris.Board</node>
+    <node x="930.5208333333334" y="1410.5">com.coolcompany.jtetris.DefaultBrain</node>
+    <node x="20.166491596638707" y="178.0">com.coolcompany.jtetris.Piece</node>
+    <node x="3.769957983193308" y="1194.0">com.coolcompany.jtetris.JTetris</node>
+    <node x="895.875" y="920.0">com.coolcompany.jtetris.Brain.Move</node>
+    <node x="614.875" y="1338.5">com.coolcompany.jtetris.BoardTest</node>
+    <node x="21.5" y="824.0">com.coolcompany.jtetris.PieceTest</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.coolcompany.jtetris.JTetris" target="com.coolcompany.jtetris.Board">
+      <point x="198.0" y="-256.0" />
+      <point x="465.7699579831933" y="1174.0" />
+      <point x="509.37500000000006" y="1174.0" />
+      <point x="-58.625" y="208.5" />
+    </edge>
+    <edge source="com.coolcompany.jtetris.JBrainTetris" target="com.coolcompany.jtetris.Brain.Move">
+      <point x="-35.625" y="-88.0" />
+      <point x="893.9427521008404" y="1731.0" />
+      <point x="917.375" y="1731.0" />
+      <point x="-21.5" y="15.5" />
+    </edge>
+    <edge source="com.coolcompany.jtetris.JBrainTetris" target="com.coolcompany.jtetris.DefaultBrain">
+      <point x="106.875" y="-88.0" />
+      <point x="1036.4427521008404" y="1731.0" />
+      <point x="1112.5208333333335" y="1731.0" />
+      <point x="0.0" y="39.5" />
+    </edge>
+    <edge source="com.coolcompany.jtetris.DefaultBrain" target="com.coolcompany.jtetris.Brain.Move">
+      <point x="-91.0" y="-39.5" />
+      <point x="1021.5208333333334" y="1174.0" />
+      <point x="960.375" y="1174.0" />
+      <point x="21.5" y="15.5" />
+    </edge>
+    <edge source="com.coolcompany.jtetris.Piece" target="com.coolcompany.jtetris.TPoint">
+      <point x="133.25" y="-244.5" />
+      <point x="419.9164915966387" y="153.0" />
+      <point x="341.6232492997199" y="153.0" />
+      <point x="58.0" y="64.0" />
+    </edge>
+    <edge source="com.coolcompany.jtetris.JTetris" target="com.coolcompany.jtetris.Piece">
+      <point x="-66.0" y="-256.0" />
+      <point x="201.7699579831933" y="1164.0" />
+      <point x="11.0" y="1164.0" />
+      <point x="11.0" y="697.0" />
+      <point x="134.3807773109245" y="697.0" />
+      <point x="-152.28571428571422" y="244.5" />
+    </edge>
+    <edge source="com.coolcompany.jtetris.BoardTest" target="com.coolcompany.jtetris.Piece">
+      <point x="36.5" y="-111.5" />
+      <point x="797.375" y="1174.0" />
+      <point x="826.4375" y="1174.0" />
+      <point x="826.4375" y="707.0" />
+      <point x="362.80934873949593" y="707.0" />
+      <point x="76.14285714285722" y="244.5" />
+    </edge>
+    <edge source="com.coolcompany.jtetris.Brain.Move" target="com.coolcompany.jtetris.Brain">
+      <point x="21.5" y="-15.5" />
+      <point x="960.375" y="707.0" />
+      <point x="996.7284663865546" y="707.0" />
+      <point x="-86.0" y="27.5" />
+    </edge>
+    <edge source="com.coolcompany.jtetris.PieceTest" target="com.coolcompany.jtetris.Piece">
+      <point x="-73.0" y="-111.5" />
+      <point x="94.5" y="707.0" />
+      <point x="210.5236344537816" y="707.0" />
+      <point x="-76.14285714285711" y="244.5" />
+    </edge>
+    <edge source="com.coolcompany.jtetris.DefaultBrain" target="com.coolcompany.jtetris.Brain">
+      <point x="91.0" y="-39.5" />
+      <point x="1203.5208333333335" y="707.0" />
+      <point x="1168.7284663865546" y="707.0" />
+      <point x="86.0" y="27.5" />
+    </edge>
+    <edge source="com.coolcompany.jtetris.BoardTest" target="com.coolcompany.jtetris.Board">
+      <point x="-109.5" y="-111.5" />
+      <point x="651.375" y="1174.0" />
+      <point x="626.625" y="1174.0" />
+      <point x="58.625" y="208.5" />
+    </edge>
+    <edge source="com.coolcompany.jtetris.BadBrain" target="com.coolcompany.jtetris.DefaultBrain">
+      <point x="0.0" y="-27.5" />
+      <point x="1226.7076330532213" y="1731.0" />
+      <point x="1233.8541666666665" y="1731.0" />
+      <point x="121.33333333333326" y="39.5" />
+    </edge>
+    <edge source="com.coolcompany.jtetris.Brain.Move" target="com.coolcompany.jtetris.Piece">
+      <point x="-21.5" y="-15.5" />
+      <point x="917.375" y="687.0" />
+      <point x="515.0950630252103" y="687.0" />
+      <point x="228.42857142857156" y="244.5" />
+    </edge>
+    <edge source="com.coolcompany.jtetris.JBrainTetris" target="com.coolcompany.jtetris.JTetris">
+      <point x="-106.875" y="-88.0" />
+      <point x="822.6927521008404" y="1731.0" />
+      <point x="267.7699579831933" y="1731.0" />
+      <point x="0.0" y="256.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.6830645161290322" x="665.9055489964582" y="753.2373081463991" />
+  <SelectedNodes>
+    <node>com.coolcompany.jtetris.Piece</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+    <Category>Constructors</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
