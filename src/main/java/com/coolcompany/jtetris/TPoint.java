@@ -1,6 +1,6 @@
 //TPoint.java
 
-package tetris;
+package com.coolcompany.jtetris;
 
 /*
  This is just a trivial "struct" type class --
@@ -10,6 +10,7 @@ package tetris;
  is not an object really.
  */
 public class TPoint {
+
 	public int x;
 	public int y;
 
@@ -35,8 +36,8 @@ public class TPoint {
 		if (!(other instanceof TPoint)) return false;
 
 		// check if other point same as us
-		TPoint pt = (TPoint)other;
-		return(x==pt.x && y==pt.y);
+		TPoint pt = (TPoint) other;
+		return (x == pt.x && y == pt.y);
 	}
 
 	// Standard toString() override, produce

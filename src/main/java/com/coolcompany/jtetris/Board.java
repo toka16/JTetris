@@ -1,5 +1,5 @@
 // Board.java
-package tetris;
+package com.coolcompany.jtetris;
 
 import java.util.Arrays;
 
