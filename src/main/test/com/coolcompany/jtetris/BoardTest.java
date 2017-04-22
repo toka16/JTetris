@@ -1,5 +1,7 @@
 package com.coolcompany.jtetris;
 
+import com.coolcompany.jtetris.Board;
+import com.coolcompany.jtetris.Piece;
 import org.junit.Before;
 import org.junit.Test;
 
