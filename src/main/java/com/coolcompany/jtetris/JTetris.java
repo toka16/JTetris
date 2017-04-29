@@ -694,7 +694,7 @@ public class JTetris extends JComponent {
 	 * The new frame is not visible.
 	 */
 	public static JFrame createFrame(JTetris tetris) {
-		JFrame frame = new JFrame("Stanford Tetris");
+		JFrame frame = new JFrame("TSU Tetris");
 		JComponent container = (JComponent) frame.getContentPane();
 		container.setLayout(new BorderLayout());
 
