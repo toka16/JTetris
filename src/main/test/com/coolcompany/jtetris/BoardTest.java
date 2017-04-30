@@ -11,12 +11,6 @@ public class BoardTest {
 	private Board b;
 	private Piece pyr1, pyr2, pyr3, pyr4, s, sRotated;
 
-	// This shows how to build things in setUp() to re-use
-	// across tests.
-
-	// In this case, setUp() makes shapes,
-	// and also a 3X6 board, with pyr placed at the bottom,
-	// ready to be used by tests.
 	@Before
 	public void setUp() throws Exception {
 		b = new Board(3, 6);
@@ -32,7 +26,6 @@ public class BoardTest {
 		b.place(pyr1, 0, 0);
 	}
 
-	// Check the basic width/height/max after the one placement
 	@Test
 	public void testSample1() {
 		assertEquals(1, b.getColumnHeight(0));
@@ -45,7 +38,6 @@ public class BoardTest {
 		assertEquals(6, b.getHeight());
 	}
 
-	// Place sRotated into the board, then check some measures
 	@Test
 	public void testSample2() {
 		b.commit();
