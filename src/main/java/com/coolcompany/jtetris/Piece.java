@@ -1,27 +1,8 @@
-// Piece.java
 package com.coolcompany.jtetris;
 
 import java.util.*;
 
-/**
- * An immutable representation of a tetris piece in a particular rotation.
- * Each piece is defined by the blocks that make up its body.
- * <p>
- * Typical client code looks like...
- * <pre>
- * Piece pyra = new Piece(PYRAMID_STR);		// Create piece from string
- * int width = pyra.getWidth();			// 3
- * Piece pyra2 = pyramid.computeNextRotation(); // get rotation, slow way
- *
- * Piece[] pieces = Piece.getPieces();	// the array of root pieces
- * Piece stick = pieces[STICK];
- * int width = stick.getWidth();		// get its width
- * Piece stick2 = stick.fastRotation();	// get the next rotation, fast way
- * </pre>
- */
 public class Piece {
-	// Starter code specs out a few basic things, leaving
-	// the algorithms to be done.
 	private TPoint[] body;
 	private int[] skirt;
 	private int width;
@@ -96,7 +77,6 @@ public class Piece {
 	/**
 	 * Alternate constructor, takes a String with the x,y body points
 	 * all separated by spaces, such as "0 0  1 0  2 0	1 1".
-	 * (provided)
 	 */
 	public Piece(String points) {
 		this(parsePoints(points));
@@ -163,11 +143,8 @@ public class Piece {
 	 * if two rotations are effectively the same.
 	 */
 	public boolean equals(Object obj) {
-		// standard equals() technique 1
 		if (obj == this) return true;
 
-		// standard equals() technique 2
-		// (null will be false)
 		if (!(obj instanceof Piece)) return false;
 		Piece other = (Piece) obj;
 
@@ -253,11 +230,6 @@ public class Piece {
 	 * as possible. Returns the root piece. fastRotation() relies on the
 	 * pointer structure setup here.
 	 */
-	/*
-	 Implementation: uses computeNextRotation()
-	 and Piece.equals() to detect when the rotations have gotten us back
-	 to the first piece.
-	*/
 	private static Piece makeFastRotations(Piece root) {
 		Piece temp = root;
 		while (true) {
@@ -276,7 +248,6 @@ public class Piece {
 	/**
 	 * Given a string of x,y pairs ("0 0	0 1 0 2 1 0"), parses
 	 * the points into a TPoint[] array.
-	 * (Provided code)
 	 */
 	private static TPoint[] parsePoints(String string) {
 		List<TPoint> points = new ArrayList<TPoint>();
@@ -292,14 +263,10 @@ public class Piece {
 			throw new RuntimeException("Could not parse x,y string:" + string);
 		}
 
-		// Make an array out of the collection
 		TPoint[] array = points.toArray(new TPoint[0]);
 		return array;
 	}
 
-	/*
-	 * Convert the piece into string as the list of points
-	 */
 	@Override
 	public String toString() {
 		String res = "[";

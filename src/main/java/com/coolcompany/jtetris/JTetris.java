@@ -1,4 +1,3 @@
-// JTetris.java
 package com.coolcompany.jtetris;
 
 import javax.swing.*;
@@ -8,33 +7,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
-
-
-/**
- * CS108 Tetris Game.
- * JTetris presents a tetris game in a window.
- * It handles the GUI and the animation.
- * The Piece and Board classes handle the
- * lower-level computations.
- * This code is provided in finished, working form for the students.
- * <p>
- * Use Keys j-k-l to move, n to drop (or 4-5-6 0)
- * During animation, filled rows draw as green.
- * Clearing 1-4 rows scores 5, 10, 20, 40 points.
- * Clearing 4 rows at a time beeps!
- */
-
-/*
- Implementation notes:
- -The "currentPiece" points to a piece that is
- currently falling, or is null when there is no piece.
- -tick() moves the current piece
- -a timer object calls tick(DOWN) periodically
- -keystrokes call tick() with LEFT, RIGHT, etc.
- -Board.undo() is used to remove the piece from its
- old position and then Board.place() is used to install
- the piece in its new position.
-*/
 
 public class JTetris extends JComponent {
 	// size of the board in blocks
@@ -67,8 +39,6 @@ public class JTetris extends JComponent {
 
 
 	// The piece we're thinking about playing
-	// -- set by computeNewPosition
-	// (storing this in ivars is slightly questionable style)
 	protected Piece newPiece;
 	protected int newX;
 	protected int newY;
@@ -100,8 +70,6 @@ public class JTetris extends JComponent {
 	JTetris(int pixels) {
 		super();
 
-		// Set component size to allow given pixels for each block plus
-		// a 1 pixel border around the whole thing.
 		setPreferredSize(new Dimension((WIDTH * pixels) + 2,
 				(HEIGHT + TOP_SPACE) * pixels + 2));
 		gameOn = false;
@@ -109,15 +77,6 @@ public class JTetris extends JComponent {
 		pieces = Piece.getPieces();
 		board = new Board(WIDTH, HEIGHT + TOP_SPACE);
 
-
-		/*
-		 Register key handlers that call
-		 tick with the appropriate constant.
-		 e.g. 'j' and '4'  call tick(LEFT)
-		 
-		 I tried doing the arrow keys, but the JSliders
-		 try to use those too, causing problems.
-		*/
 
 		// LEFT
 		registerKeyboardAction(
@@ -347,11 +306,6 @@ public class JTetris extends JComponent {
 	 * i.e. the piece should not be in the board at the moment.
 	 * This is necessary so dropHeight() may be called without
 	 * the piece "hitting itself" on the way down.
-	 * <p>
-	 * Sets the ivars newX, newY, and newPiece to hold
-	 * what it thinks the new piece position should be.
-	 * (Storing an intermediate result like that in
-	 * ivars is a little tacky.)
 	 */
 	public void computeNewPosition(int verb) {
 		// As a starting point, the new position is the same as the old
@@ -371,10 +325,6 @@ public class JTetris extends JComponent {
 
 			case ROTATE:
 				newPiece = newPiece.fastRotation();
-
-				// tricky: make the piece appear to rotate about its center
-				// can't just leave it at the same lower-left origin as the
-				// previous piece.
 				newX = newX + (currentPiece.getWidth() - newPiece.getWidth()) / 2;
 				newY = newY + (currentPiece.getHeight() - newPiece.getHeight()) / 2;
 				break;
@@ -385,9 +335,6 @@ public class JTetris extends JComponent {
 
 			case DROP:
 				newY = board.dropHeight(newPiece, newX);
-
-				// trick: avoid the case where the drop would cause
-				// the piece to appear to move up
 				if (newY > currentY) {
 					newY = currentY;
 				}
@@ -412,27 +359,18 @@ public class JTetris extends JComponent {
 	 * LEFT RIGHT ROTATE DROP for the user moves,
 	 * and the timer calls it with the verb DOWN to move
 	 * the piece down one square.
-	 * <p>
-	 * Before this is called, the piece is at some location in the board.
-	 * This advances the piece to be at its next location.
-	 * <p>
-	 * Overriden by the brain when it plays.
 	 */
 	public void tick(int verb) {
 		if (!gameOn) return;
 
 		if (currentPiece != null) {
-			board.undo();    // remove the piece from its old position
+			board.undo();
 		}
 
-		// Sets the newXXX ivars
 		computeNewPosition(verb);
 
-		// try out the new position (rolls back if it doesn't work)
 		int result = setCurrent(newPiece, newX, newY);
 
-		// if row clearing is going to happen, draw the
-		// whole board so the green row shows up
 		if (result == Board.PLACE_ROW_FILLED) {
 			repaint();
 		}
@@ -440,25 +378,15 @@ public class JTetris extends JComponent {
 
 		boolean failed = (result >= Board.PLACE_OUT_BOUNDS);
 
-		// if it didn't work, put it back the way it was
 		if (failed) {
 			if (currentPiece != null) board.place(currentPiece, currentX, currentY);
 			repaintPiece(currentPiece, currentX, currentY);
 		}
 		
-		/*
-		 How to detect when a piece has landed:
-		 if this move hits something on its DOWN verb,
-		 and the previous verb was also DOWN (i.e. the player was not
-		 still moving it),	then the previous position must be the correct
-		 "landed" position, so we're done with the falling of this piece.
-		*/
-		if (failed && verb == DOWN && !moved) {    // it's landed
+		if (failed && verb == DOWN && !moved) {
 
 			int cleared = board.clearRows();
 			if (cleared > 0) {
-				// score goes up by 5, 10, 20, 40 for row clearing
-				// clearing 4 gets you a beep!
 				switch (cleared) {
 					case 1:
 						score += 5;
@@ -474,7 +402,7 @@ public class JTetris extends JComponent {
 						Toolkit.getDefaultToolkit().beep();
 						break;
 					default:
-						score += 50;  // could happen with non-standard pieces
+						score += 50;
 				}
 				updateCounters();
 				repaint();    // repaint to show the result of the row clearing
@@ -510,24 +438,10 @@ public class JTetris extends JComponent {
 
 			repaint(px, py, pwidth, pheight);
 		} else {
-			// Not-optimized -- rather than repaint
-			// just the piece rect, repaint the whole board.
 			repaint();
 		}
 	}
-	
-	
-	/*
-	 Pixel helpers.
-	 These centralize the translation of (x,y) coords
-	 that refer to blocks in the board to (x,y) coords that
-	 count pixels. Centralizing these computations here
-	 is the only prayer that repaintPiece() and paintComponent()
-	 will be consistent.
-	 
-	 The +1's and -2's are to account for the 1 pixel
-	 rect around the perimeter.
-	*/
+
 
 
 	// width in pixels of a block
@@ -576,7 +490,6 @@ public class JTetris extends JComponent {
 		}
 
 
-		// Factor a few things out to help the optimizer
 		final int dx = Math.round(dX() - 2);
 		final int dy = Math.round(dY() - 2);
 		final int bWidth = board.getWidth();
@@ -725,10 +638,6 @@ public class JTetris extends JComponent {
 	 * Creates a frame with a JTetris.
 	 */
 	public static void main(String[] args) {
-		// Set GUI Look And Feel Boilerplate.
-		// Do this incantation at the start of main() to tell Swing
-		// to use the GUI LookAndFeel of the native platform. It's ok
-		// to ignore the exception.
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception ignored) {
