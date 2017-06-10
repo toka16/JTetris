@@ -1,7 +1,9 @@
 // Piece.java
 package com.coolcompany.jtetris;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 
 /**
  * An immutable representation of a tetris piece in a particular rotation.
@@ -20,22 +22,28 @@ import java.util.*;
  * </pre>
  */
 public class Piece {
+
 	// Starter code specs out a few basic things, leaving
 	// the algorithms to be done.
 	private TPoint[] body;
+
 	private int[] skirt;
+
 	private int width;
+
 	private int height;
+
 	private Piece next; // "next" rotation
 
 	static private Piece[] pieces;    // singleton static array of first rotations
+
 	static private boolean piecesInitialized = false;
 
 	/**
 	 * Defines a new piece given a TPoint[] array of its body.
 	 * Makes its own copy of the array and the TPoints inside it.
 	 */
-	public Piece(TPoint[] points) {
+	private Piece(TPoint[] points) {
 		body = points.clone();
 		width = getWidth(points);
 		skirt = getSkirt(points);
@@ -52,9 +60,9 @@ public class Piece {
 		for (int i = 0; i < width; i++)
 			sk[i] = 5;   // more than the highest possible point in piece
 
-		for (int i = 0; i < points.length; i++)
-			if (points[i].y < sk[points[i].x])
-				sk[points[i].x] = points[i].y;
+		for (TPoint point : points)
+			if (point.y < sk[point.x])
+				sk[point.x] = point.y;
 		return sk;
 	}
 
@@ -64,9 +72,9 @@ public class Piece {
 	 */
 	private int getWidth(TPoint[] points) {
 		int width = 0;
-		for (int i = 0; i < points.length; i++)
-			if (points[i].x > width)
-				width = points[i].x;
+		for (TPoint point : points)
+			if (point.x > width)
+				width = point.x;
 		return width + 1;
 	}
 
@@ -75,9 +83,9 @@ public class Piece {
 	 */
 	private int getHeight(TPoint[] points) {
 		int height = 0;
-		for (int i = 0; i < points.length; i++)
-			if (points[i].y > height)
-				height = points[i].y;
+		for (TPoint point : points)
+			if (point.y > height)
+				height = point.y;
 		return height + 1;
 	}
 
@@ -98,21 +106,21 @@ public class Piece {
 	 * all separated by spaces, such as "0 0  1 0  2 0	1 1".
 	 * (provided)
 	 */
-	public Piece(String points) {
+	Piece(String points) {
 		this(parsePoints(points));
 	}
 
 	/**
 	 * Returns the width of the piece measured in blocks.
 	 */
-	public int getWidth() {
+	int getWidth() {
 		return width;
 	}
 
 	/**
 	 * Returns the height of the piece measured in blocks.
 	 */
-	public int getHeight() {
+	int getHeight() {
 		return height;
 	}
 
@@ -120,7 +128,7 @@ public class Piece {
 	 * Returns a pointer to the piece's body. The caller
 	 * should not modify this array.
 	 */
-	public TPoint[] getBody() {
+	TPoint[] getBody() {
 		return body;
 	}
 
@@ -130,7 +138,7 @@ public class Piece {
 	 * This is useful for computing where the piece will land.
 	 * The caller should not modify this array.
 	 */
-	public int[] getSkirt() {
+	int[] getSkirt() {
 		return skirt;
 	}
 
@@ -139,7 +147,7 @@ public class Piece {
 	 * Returns a new piece that is 90 degrees counter-clockwise
 	 * rotated from the receiver.
 	 */
-	public Piece computeNextRotation() {
+	Piece computeNextRotation() {
 		return nextRotation(body);
 	}
 
@@ -179,8 +187,8 @@ public class Piece {
 	 * else return false
 	 */
 	private boolean bodyEquals(TPoint[] body1, TPoint[] body2) {
-		for (int i = 0; i < body1.length; i++)
-			if (!contains(body2, body1[i]))
+		for (TPoint aBody1 : body1)
+			if (!contains(body2, aBody1))
 				return false;
 		return true;
 	}
@@ -190,8 +198,8 @@ public class Piece {
 	 * else return false
 	 */
 	private boolean contains(TPoint[] body, TPoint p) {
-		for (int i = 0; i < body.length; i++)
-			if (body[i].equals(p))
+		for (TPoint aBody : body)
+			if (aBody.equals(p))
 				return true;
 		return false;
 	}
@@ -225,7 +233,7 @@ public class Piece {
 	 * until eventually getting back to the first rotation.
 	 * (provided code)
 	 */
-	public static Piece[] getPieces() {
+	static Piece[] getPieces() {
 		// lazy evaluation -- create static array if needed
 		if (!Piece.piecesInitialized) {
 			// use makeFastRotations() to compute all the rotations for each piece
@@ -293,8 +301,7 @@ public class Piece {
 		}
 
 		// Make an array out of the collection
-		TPoint[] array = points.toArray(new TPoint[0]);
-		return array;
+		return points.toArray(new TPoint[0]);
 	}
 
 	/*
@@ -302,10 +309,9 @@ public class Piece {
 	 */
 	@Override
 	public String toString() {
-		String res = "[";
-		for (int i = 0; i < body.length; i++)
-			res += body[i].toString();
-		res += "]";
-		return res;
+		StringBuilder res = new StringBuilder("[");
+		for (TPoint aBody : body) res.append(aBody.toString());
+		res.append("]");
+		return res.toString();
 	}
 }

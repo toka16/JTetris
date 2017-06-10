@@ -9,13 +9,14 @@ package com.coolcompany.jtetris;
  We'll allow public access to x/y, so this
  is not an object really.
  */
-public class TPoint {
+public class TPoint implements Point {
 
-	public int x;
-	public int y;
+	int x;
+
+	int y;
 
 	// Creates a TPoint based in int x,y
-	public TPoint(int x, int y) {
+	TPoint(int x, int y) {
 		// questionable style but convenient --
 		// params with same name as ivars
 
@@ -23,10 +24,14 @@ public class TPoint {
 		this.y = y;
 	}
 
-	// Creates a TPoint, copied from an existing TPoint
-	public TPoint(TPoint point) {
-		this.x = point.x;
-		this.y = point.y;
+	@Override
+	public int getX() {
+		return x;
+	}
+
+	@Override
+	public int getY() {
+		return y;
 	}
 
 	// Standard equals() override

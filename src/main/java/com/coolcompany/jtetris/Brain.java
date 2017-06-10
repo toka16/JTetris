@@ -3,15 +3,6 @@
 package com.coolcompany.jtetris;
 
 public interface Brain {
-	// Move is used as a struct to store a single Move
-	// ("static" here means it does not have a pointer to an
-	// enclosing Brain object, it's just in the Brain namespace.)
-	class Move {
-		public int x;
-		public int y;
-		public Piece piece;
-		public double score;    // lower scores are better
-	}
 
 	/**
 	 * Given a piece and a board, returns a move object that represents
@@ -24,5 +15,5 @@ public interface Brain {
 	 * If the passed in move is non-null, it is used to hold the result
 	 * (just to save the memory allocation).
 	 */
-	Brain.Move bestMove(Board board, Piece piece, int limitHeight, Brain.Move move);
+	Move bestMove(Board board, Piece piece, int limitHeight, Move move);
 }

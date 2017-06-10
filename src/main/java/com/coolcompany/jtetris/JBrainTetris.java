@@ -20,6 +20,14 @@ public class JBrainTetris extends JTetris {
 		super(pixels);
 	}
 
+	/**
+	 * Creates a frame with JBraneTetris
+	 */
+	public static void main(String[] args) {
+		JBrainTetris tetris = new JBrainTetris(16);
+		JFrame frame = createFrame(tetris);
+		frame.setVisible(true);
+	}
 
 	/**
 	 * Create control panel using super class and add brain and adversary to it
@@ -70,7 +78,6 @@ public class JBrainTetris extends JTetris {
 		return newPiece;
 	}
 
-
 	/*
 	 * Calculate best move score for every piece and return one, which has
 	 * the largest score
@@ -83,7 +90,7 @@ public class JBrainTetris extends JTetris {
 		int pieceIndex = 0;
 		double score = -1;
 		Piece[] pieces = Piece.getPieces();
-		Brain.Move curMove = new Brain.Move();
+		Move curMove = new Move();
 		for (int i = 0; i < pieces.length; i++) {
 			curMove = db.bestMove(board, pieces[i], HEIGHT, curMove);
 			if (curMove != null) {
@@ -108,7 +115,7 @@ public class JBrainTetris extends JTetris {
 			newX = currentX;
 			newY = currentY - 1;
 			newPiece = currentPiece;
-			Brain.Move move = new Brain.Move();
+			Move move = new Move();
 			move = db.bestMove(board, currentPiece, HEIGHT, move);
 			if (move != null) {
 				if (!move.piece.equals(currentPiece)) {
@@ -134,16 +141,6 @@ public class JBrainTetris extends JTetris {
 				board.undo();
 			}
 		}
-	}
-
-
-	/**
-	 * Creates a frame with JBraneTetris
-	 */
-	public static void main(String[] args) {
-		JBrainTetris tetris = new JBrainTetris(16);
-		JFrame frame = createFrame(tetris);
-		frame.setVisible(true);
 	}
 
 }
