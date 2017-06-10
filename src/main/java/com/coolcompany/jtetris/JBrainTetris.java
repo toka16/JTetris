@@ -103,10 +103,10 @@ public class JBrainTetris extends JTetris {
 		return pieces[pieceIndex];
 	}
 
-	//	/**
-//	 * Check if brain mode is selected, if it is, compute next position and rotation
-//	 * using brain, else compute next position and rotation using super class
-//	 */
+	/**
+	 * Check if brain mode is selected, if it is, compute next position and rotation
+	 * using brain, else compute next position and rotation using super class
+	 */
 	@Override
 	public void computeNewPosition(int verb) {
 		if (!brainBox.isSelected() || verb != DOWN) {
